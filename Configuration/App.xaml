@@ -1,7 +1,7 @@
-﻿<Application x:Class="PrinterTest.App"
+﻿<Application x:Class="PrinterTest.Configuration.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:PrinterTest"
+             xmlns:local="clr-namespace:PrinterTest.Configuration"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
          

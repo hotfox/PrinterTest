@@ -12,8 +12,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.ComponentModel.Composition;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
-namespace PrinterTest
+namespace PrinterTest.Configuration
 {
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
@@ -23,6 +26,15 @@ namespace PrinterTest
         public MainWindow()
         {
             InitializeComponent();
+        }
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            var m = ListBox1.DataContext as SubTestManagerPresenter;
+            using (var s = File.Create("test.test"))
+            {
+                var bf = new BinaryFormatter();
+                bf.Serialize(s, m.subTestManager);
+            }
         }
     }
 }

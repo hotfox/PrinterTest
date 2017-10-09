@@ -1,0 +1,41 @@
+﻿<Window x:Class="PrinterTest.Configuration.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PrinterTest.Configuration"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Window.Resources>
+        <local:SubTestManagerPresenter x:Key="Manager"/>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+        <Menu>
+            <MenuItem Header="Save" Click="MenuItem_Click"/>
+        </Menu>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <ListBox x:Name="ListBox1" DataContext="{StaticResource Manager}" ItemsSource="{Binding SubTests}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Label Content="{Binding SubTestName}"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <TextBox Grid.Column="1"
+                     TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True"
+                     DataContext="{Binding SelectedItem,ElementName=ListBox1}" Text="{Binding ConfigurationString,Mode=TwoWay}">
+            </TextBox>
+        </Grid>
+        <StatusBar Grid.Row="2">
+        </StatusBar>
+    </Grid>
+</Window>
