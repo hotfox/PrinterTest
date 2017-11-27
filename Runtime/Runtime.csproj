@@ -96,17 +96,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Configuration\Configuration.csproj">
-      <Project>{8602f98b-e01e-45fc-86f8-98eb20e6a45b}</Project>
-      <Name>Configuration</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">
       <Project>{2b2a3b71-fd77-4a77-a765-8d3d1ab04ca9}</Project>
       <Name>Infrastructure</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Intermec\Intermec.csproj">
-      <Project>{b18bce7f-c0cd-4383-81bf-139610d1e667}</Project>
-      <Name>Intermec</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

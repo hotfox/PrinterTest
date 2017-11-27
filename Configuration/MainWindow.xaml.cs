@@ -29,11 +29,11 @@ namespace PrinterTest.Configuration
         }
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            var m = ListBox1.DataContext as SubTestManagerPresenter;
+            var m = ListBox1.DataContext as TestManagerPresenter;
             using (var s = File.Create("test.test"))
             {
                 var bf = new BinaryFormatter();
-                bf.Serialize(s, m.subTestManager);
+                bf.Serialize(s, m.testManager.TestStream);
             }
         }
     }

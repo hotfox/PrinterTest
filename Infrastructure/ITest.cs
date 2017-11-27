@@ -6,13 +6,15 @@ using System.Threading.Tasks;
 
 namespace PrinterTest.Infrastructure
 {
-    public interface ISubTest
+    public interface ITest
     {
-        int Execute(IPrinter printer);
+        int Execute(Context context);
         string Name { get; set; }
-        string ConfigurationString { get; set; }
+        string ConfigString { get; }
+        bool SaveConfigString(string config);
+        void LoadDefaultConfigString();
     }
-    public interface ISubTestData
+    public interface ITestData
     {
         string Name { get; }
     }

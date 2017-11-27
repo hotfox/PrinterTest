@@ -10,17 +10,14 @@ using System.ComponentModel.Composition.Hosting;
 
 namespace PrinterTest.Configuration
 {
-    [Serializable]
-    public class SubTestManager
+    public class TestManager
     {
         [ImportMany]
-        [NonSerialized]
-        IEnumerable<Lazy<ISubTest,ISubTestData>> subtests;
-        public ICollection<ISubTest> SubTests { get; }
-        public SubTestManager()
+        IEnumerable<Lazy<ITest,ITestData>> subtests;
+        public TestStream TestStream { get; private set; } = new TestStream();
+        public TestManager()
         {
-            SubTests = new List<ISubTest>();
-            string path = AppDomain.CurrentDomain.BaseDirectory + "SubTests";
+            string path = AppDomain.CurrentDomain.BaseDirectory + "Tests";
             if(Directory.Exists(path))
             {
                 AggregateCatalog catalog = new AggregateCatalog();
@@ -32,7 +29,7 @@ namespace PrinterTest.Configuration
                     foreach(var pair in subtests)
                     {
                         pair.Value.Name = pair.Metadata.Name;
-                        SubTests.Add(pair.Value);
+                        TestStream.AppendTest(pair.Value);
                     }
                 }
                 catch(CompositionException ce)

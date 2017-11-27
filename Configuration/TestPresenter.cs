@@ -11,36 +11,31 @@ using System.Windows.Input;
 
 namespace PrinterTest.Configuration
 {
-    public class SubTestPresenter:DependencyObject, INotifyPropertyChanged
+    public class TestPresenter:DependencyObject, INotifyPropertyChanged
     {
-        public ISubTest subTest;
-        public SubTestPresenter(ISubTest subTest)
+        public ITest test;
+        public TestPresenter(ITest test)
         {
-            this.subTest = subTest;
+            this.test = test;
         }
         public string SubTestName
         {
             get
             {
-                return subTest.Name;
+                return test.Name;
             }
         }
-        public string ConfigurationString
+        public string ConfigString
         {
             get
             {
-                return subTest.ConfigurationString;
+                return test.ConfigString;
             }
             set
             {
-                try
-                {
-                    subTest.ConfigurationString = value;
-                }
-                catch(Exception e)
-                {
-                    MessageBox.Show(e.Message);
-                }
+                bool r = test.SaveConfigString(value);
+                if (!r)
+                    MessageBox.Show("配置文件格式不正确！");
             }
         }
         public event PropertyChangedEventHandler PropertyChanged;

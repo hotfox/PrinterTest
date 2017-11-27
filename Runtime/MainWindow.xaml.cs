@@ -15,8 +15,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
-using PrinterTest.Configuration;
-using PrinterTest.Printers;
 using PrinterTest.Infrastructure;
 
 namespace PrinterTest.Runtime
@@ -37,16 +35,16 @@ namespace PrinterTest.Runtime
             dialog.Filter = "Test Files|*.test";
             if(dialog.ShowDialog()==true)
             {
-                SubTestManager manager;
+                TestStream ts;
                 using (var s = File.OpenRead(dialog.FileName))
                 {
                     var bf = new BinaryFormatter();
-                    manager = bf.Deserialize(s) as SubTestManager;
+                    ts = bf.Deserialize(s) as TestStream;
                 }
-                Intermec printer = new Intermec();
-                foreach(ISubTest subtest in manager.SubTests)
+                Context context = new Context();
+                foreach(ITest test in ts.Tests)
                 {
-                    subtest.Execute(printer);
+                    test.Execute(context);
                 }
             }
         }
